@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('stylesheet') }}">
+</head>
+<body>
+<div class="container">
+    <h1>{{ title }}</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
     <title>Upload Image</title>
 </head>
 <body>
@@ -9,4 +27,4 @@
         <input type="submit" value="Submit">
     </form>
 </body>
-</html>
+</html>-->
