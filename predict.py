@@ -4,14 +4,14 @@ import cv2
 
 
 
-INPUT_FILE='/Users/priyamvada./Documents/animal_project/Side/23512.jpg'
-labels_file='/Users/priyamvada./Documents/animal_project/classes.names'
-CONFIG_FILE='/Users/priyamvada./Documents/animal_project/yolov3_custom_training1.cfg'
-WEIGHTS_FILE='/Users/priyamvada./Documents/animal_project/yolov3_custom_training1_last_100_working_12.48pm.weights'
 
-def predict(INPUT_FILE,labels_file,CONFIG_FILE,WEIGHTS_FILE):
 
-    CONFIDENCE_THRESHOLD=0.5
+def predict(INPUT_FILE):
+    labels_file='/Users/priyamvada./Documents/animal_project/classes.names'
+    CONFIG_FILE='/Users/priyamvada./Documents/animal_project/yolov3_custom_training1.cfg'
+    WEIGHTS_FILE='/Users/priyamvada./Documents/animal_project/yolov3_custom_training1_last_100_working_12.48pm.weights'   
+
+    CONFIDENCE_THRESHOLD=0.75
 
     classes = open(labels_file).read().strip().split("\n")
     print(classes,"1 :",classes[0])
@@ -23,6 +23,9 @@ def predict(INPUT_FILE,labels_file,CONFIG_FILE,WEIGHTS_FILE):
     except:
         print('------ anh --------')
 
+
+
+    #input_file = INPUT_FILE.read()
     image = cv2.imread(INPUT_FILE)
     (H, W) = image.shape[:2]
 
@@ -76,19 +79,35 @@ def predict(INPUT_FILE,labels_file,CONFIG_FILE,WEIGHTS_FILE):
 
     COLORS = np.random.randint(0, 255, size=(len(classes), 3),
         dtype="uint8")
+    
+    to_return=[]
     if len(idxs) > 0:
         for i in idxs.flatten():
             (x, y) = (boxes[i][0], boxes[i][1])
             (w, h) = (boxes[i][2], boxes[i][3])
+        
 
             color = [int(c) for c in COLORS[classIDs[i]]]
 
-            cv2.rectangle(image, (x, y), (x + w, y + h), color, 1)
+            cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
             text = "{}: {:.4f}".format(classes[classIDs[i]], confidences[i])
             print(" classIDs[i] :",classIDs[i]," classes[classIDs[i]] :",classes[classIDs[i]])
             cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
-                0.5, color, 1)
+                0.5, color, 2)
+            #a={'class:',classes[classIDs[i]],x,y,w,h}
+            class_detected=classes[classIDs[i]]
+            a=(class_detected,'(x,y),(w,h):',(x,y),(w,h) ,'\n')
+            to_return.append(a)
 
     # show the output image
-    cv2.imwrite("example_1_1feb.jpg", image)
+    #filename="detected.jpg"
+    #cv2.imwrite(filename, image)
+    #print('to_return:',to_return)
+    resized_image = cv2.resize(image, (500, 500), interpolation=cv2.INTER_AREA)
+    return resized_image,to_return
     
+
+
+INPUT_FILE='/Users/priyamvada./Documents/animal_project/Side/23512.jpg'
+
+predict(INPUT_FILE)
