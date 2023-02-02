@@ -1,39 +1,15 @@
-'''import cv2
-from flask import Flask, render_template, request, jsonify
-
-app = Flask(__name__)
-
-def predict(input_image):
-    image = cv2.imread(input_image)
-    return image
-
-@app.route("/", methods=["GET", "POST"])
-def index():
-    if request.method == "POST":
-        image = request.files["image"]
-        input_file = image.read()
-        with open("input.jpg", "wb") as f:
-            f.write(input_file)
-        output = predict("input.jpg")
-        print('---- output -----',output)
-        return output
-    return render_template("index.html")
-
-if __name__ == "__main__":
-    app.run(debug=True)
-'''
-
-
-
 import cv2
 import numpy as np
 import base64
 from flask import Flask, render_template, request, jsonify
+
 from predict import predict
 
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = '/Users/priyamvada./Documents/animal_project/Animall_Project/'
+print(' ---- here1 -----')
 
+
+
+app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -43,6 +19,8 @@ def index():
         input_file = image.read()
         with open("input.jpg", "wb") as f:
             f.write(input_file)
+        print(' ---- here2 -----')
+
         
         
         try:
