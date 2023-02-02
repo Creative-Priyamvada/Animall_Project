@@ -11,7 +11,7 @@ def predict(INPUT_FILE):
     CONFIG_FILE='/Users/priyamvada./Documents/animal_project/yolov3_custom_training1.cfg'
     WEIGHTS_FILE='/Users/priyamvada./Documents/animal_project/yolov3_custom_training1_last_100_working_12.48pm.weights'   
 
-    CONFIDENCE_THRESHOLD=0.75
+    CONFIDENCE_THRESHOLD=0.6
 
     classes = open(labels_file).read().strip().split("\n")
     print(classes,"1 :",classes[0])
@@ -96,8 +96,9 @@ def predict(INPUT_FILE):
                 0.5, color, 2)
             #a={'class:',classes[classIDs[i]],x,y,w,h}
             class_detected=classes[classIDs[i]]
-            a=(class_detected,'(x,y),(w,h):',(x,y),(w,h) ,'\n')
+            a=(class_detected,'(x,y),(w,h):',(x,y),(w,h),confidences[i])
             to_return.append(a)
+            to_return.append('\\n')
 
     # show the output image
     #filename="detected.jpg"
@@ -108,6 +109,6 @@ def predict(INPUT_FILE):
     
 
 
-INPUT_FILE='/Users/priyamvada./Documents/animal_project/Side/23512.jpg'
+#INPUT_FILE='/Users/priyamvada./Documents/animal_project/Side/23512.jpg'
 
-predict(INPUT_FILE)
+#predict(INPUT_FILE)
