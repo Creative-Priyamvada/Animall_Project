@@ -1,11 +1,11 @@
 # Animall_Project
 
 to run 
-`python flask1.py`
+`python flask_v2.py`
 
 
-![alt text](https://github.com/Creative-Priyamvada/Animall_Project/blob/main/screenshots/image1.png)
+![alt text](https://github.com/Creative-Priyamvada/Animall_Project/blob/main/screenshots/image4.png)
 
-![alt text](https://github.com/Creative-Priyamvada/Animall_Project/blob/main/screenshots/image2.png)
 
-![alt text](https://github.com/Creative-Priyamvada/Animall_Project/blob/main/screenshots/image3.png)
+
+Note : Model has been trained on 500 images on each category so accuracy is not very good, as i did not have enough resources to train for 15K images
